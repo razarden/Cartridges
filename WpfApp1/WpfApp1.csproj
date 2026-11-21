@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+	<Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets\cartrige.png" />
+    <None Remove="Assets\editcartrige.png" />
+    <None Remove="Assets\gray.png" />
+    <None Remove="Assets\green.png" />
+    <None Remove="Assets\house.png" />
+    <None Remove="Assets\kaplya.png" />
+    <None Remove="Assets\orange.png" />
+    <None Remove="Assets\otcheti.png" />
+    <None Remove="Assets\printers.png" />
+    <None Remove="Assets\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple" />
+  </ItemGroup>
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="11.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\cartrige.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\editcartrige.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\gray.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\green.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\house.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\kaplya.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\orange.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\otcheti.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\printers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

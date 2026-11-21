@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WebApplication2/WebApplication2.csproj" />
+  <Project Path="WpfApp1/WpfApp1.csproj" Id="cf8617b5-82ea-4cfa-9710-a5ba1c2aef76" />
+</Solution>

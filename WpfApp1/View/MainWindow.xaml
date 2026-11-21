@@ -1,0 +1,495 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Height="550" Width="1000">
+
+    <Window.Resources>
+        <Style x:Key="SideMenuRadioStyle" TargetType="RadioButton">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Foreground" Value="#1E293B"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="ItemBorder"
+                        Background="Transparent"
+                        CornerRadius="8"
+                        ClipToBounds="True">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#F1F5F9"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#E0E7FF"/>
+                                <Setter Property="Foreground" Value="#1D4ED8"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid Background="#F1F4F9">
+        <Viewbox Stretch="Uniform">
+            <Grid Height="450" Width="826">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" 
+                           Text="Учет картриджей"
+                           TextAlignment="Left" 
+                           VerticalAlignment="Top"
+                           FontSize="13" 
+                           Margin="10,10,681,0"
+                           FontWeight="Bold" Grid.ColumnSpan="2"
+                           />
+
+                <!--Бургер Меню, да еще и сворачиваемое Мама Мия-->
+                <Border x:Name="BurgerMenuContainer"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Background="White"
+                        BorderBrush="#E2E8F0"
+                        BorderThickness="0,0,1,0"
+                        Margin="0 0 10 0"
+                        Padding="5"
+                        Width="120">
+
+                    <StackPanel x:Name="BurgerMenu">
+
+                        <ToggleButton x:Name="BurgerToggle"
+                                      Width="30" Height="30"
+                                      HorizontalAlignment="Left"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      Cursor="Hand"
+                                      Margin="0,0,0,12">
+                            <TextBlock Text="☰" FontSize="18" 
+                                       Foreground="#334155"
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"/>
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="BurgerMenuContainer"
+                                                Storyboard.TargetProperty="Width"
+                                                From="120" To="40" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation 
+                                             Storyboard.TargetName="BurgerMenuContainer"
+                                             Storyboard.TargetProperty="Width"
+                                             From="40" To="120" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                        <RadioButton IsChecked="True" Style="{StaticResource SideMenuRadioStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="30" Height="30">
+                                    <Image Source="/Assets/house.png"
+                                           Stretch="Uniform" 
+                                           HorizontalAlignment="Left"
+                                           Margin="6 0 0 0"
+                                           Height="16" Width="16"/>
+                                </Border>
+                                <TextBlock Text="Главная" FontSize="12" 
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource SideMenuRadioStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="30" Height="30">
+                                    <Image Source="/Assets/kaplya.png" 
+                                           Stretch="Uniform" 
+                                           Height="16" 
+                                           HorizontalAlignment="Left"
+                                           Width="16"
+                                           Margin="6 0 0 0"/>
+                                </Border>
+                                <TextBlock Text="Картриджи" FontSize="12" 
+                                           VerticalAlignment="Center" 
+                                           Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource SideMenuRadioStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="30" Height="30">
+                                    <Image Source="/Assets/printers.png" 
+                           Stretch="Uniform"
+                                           HorizontalAlignment="Left"
+                                           Margin="6 0 0 0"
+                                           Height="16" Width="16"/>
+                                </Border>
+                                <TextBlock Text="Принтеры" FontSize="12" 
+                                           VerticalAlignment="Center" 
+                                           Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                        
+                        <RadioButton Style="{StaticResource SideMenuRadioStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="30" Height="30">
+                                    <Image Source="/Assets/otcheti.png" 
+                           Stretch="Uniform" 
+                                           HorizontalAlignment="Left"
+                                           Margin="6 0 0 0"
+                                           Height="16" Width="16"/>
+                                </Border>
+                                <TextBlock Text="Отчеты" FontSize="12" 
+                                           VerticalAlignment="Center" 
+                                           Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource SideMenuRadioStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="30" Height="30">
+                                    <Image Source="/Assets/settings.png" 
+                           Stretch="Uniform" 
+                                           HorizontalAlignment="Left"
+                                           Margin="6 0 0 0"
+                                           Height="16" Width="16"/>
+                                </Border>
+                                <TextBlock Text="Настройки" FontSize="12"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Background="White" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="130"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock 
+                           Text="Обзор" 
+                           FontSize="22" 
+                           Margin="10,10,5,0"
+                           Height="30"
+                           VerticalAlignment="Top"
+                           FontWeight="Bold"/>
+                        <Border Grid.Row="1" Margin="10,5,10,0" BorderBrush="Gray"
+                                BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="https://cdn-icons-png.flaticon.com/128/2414/2414255.png"
+                                       Margin="3 0 0 0"/>
+                                <TextBox x:Name="search_text"
+                                     Margin="0 0 0 0"
+                                     Text="Поиск по модели, принтеру..." 
+                                     FontSize="13"
+                                     Opacity="0.9"
+                                     BorderThickness="0"
+                                     VerticalContentAlignment="Center"
+                                     CaretBrush="Black"
+                                    BorderBrush="Transparent"
+                                     Background="Transparent"
+                                     Width="623"
+                                    VerticalAlignment="Center"
+                                    GotFocus="GotFocus_search"
+                                    LostFocus="LostFocus_search"
+                                    TextChanged="Text_Changed_Search_NeededRows"/>
+
+
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" 
+                                    Grid.Row="2"
+                                    Margin="0,10,0,25">
+                            <Grid Margin="10 5 " 
+                                      Width="150"
+                                      Background="#F1F4F9">
+                                <!--Image-->
+                                <Image Source="/Assets/cartrige.png" 
+                                       HorizontalAlignment="Left" 
+                                       Height="20"
+                                       Margin="25 0 0 0"
+                                       Stretch="Uniform"/>
+                                <TextBlock Height="20" 
+                                           Width="20"
+                                           Text="5"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           Margin="0 -10 20 0"/>
+                                <TextBlock Text="Всего картриджей"
+                                           Height="20" 
+                                           Width="120"
+                                           Margin="42,31,-38,-6"
+                                           FontSize="10" RenderTransformOrigin="-0.104,-0.676"/>
+
+                            </Grid>
+                            <Grid Margin="10 5 " 
+                                  Width="150"
+                                  Background="#F1F4F9">
+                                <!--Image-->
+
+                                <Image Source="/Assets/green.png" 
+                                   HorizontalAlignment="Left" 
+                                   Height="13"
+                                   Margin="30 0 0 5"
+                                   Stretch="Uniform"/>
+                                <TextBlock Height="20" 
+                                   Width="20"
+                                   Text="3"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Margin="0 -10 20 0"/>
+                                <TextBlock Text="В наличии"
+                                   Height="20" 
+                                   Width="120"
+                                   Margin="55,39,-25,1"
+                                   FontSize="10"/>
+
+                            </Grid>
+                            <Grid Margin="10 5 " 
+                                  Width="150"
+                                  Background="#F1F4F9">
+                                <!--Image-->
+
+                                <Image Source="/Assets/orange.png" 
+                                   HorizontalAlignment="Left" 
+                                   Height="13"
+                                   Margin="30 0 0 5"
+                                   Stretch="Uniform"/>
+                                <TextBlock Height="20" 
+                                   Width="20"
+                                   Text="3"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Margin="0 -10 20 0"/>
+                                <TextBlock Text="Низкий уровень"
+                                   Height="20" 
+                                   Width="120"
+                                   Margin="55,39,-25,1"
+                                   FontSize="10"/>
+
+                            </Grid>
+                            <Grid Margin="10 5 " 
+                              Width="150"
+                              Background="#F1F4F9">
+                                <!--Image-->
+
+                                <Image Source="/Assets/gray.png" 
+                                   HorizontalAlignment="Left" 
+                                   Height="13"
+                                   Margin="30 0 0 5"
+                                   Stretch="Uniform"/>
+                                <TextBlock Height="20" 
+                                   Width="20"
+                                   Text="1"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Margin="0 -10 20 0"/>
+                                <TextBlock Text="Пустой"
+                                   Height="20" 
+                                   Width="120"
+                                   Margin="55,39,-25,1"
+                                   FontSize="10"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Grid.Row="2"
+                                    Margin="10,80,12,15" Grid.RowSpan="2" 
+                                    RenderTransformOrigin="0.503,0.764"
+                                     >
+                            <TextBlock Text="Картриджи" 
+                                FontSize="13"
+                                Margin="12 5 0 10" Height="23"
+                                />
+
+                            <StackPanel Orientation="Horizontal" Width="130"
+                                        Margin="470 0 0 0"
+                                         >
+                                <Image Source="https://cdn-icons-png.flaticon.com/128/6998/6998878.png"
+                                   Height="16" Width="16" Stretch="Uniform"
+                                    />
+                                <TextBlock Text="Добавить картридж"
+                                   FontSize="11"
+                                   Margin="5,5,0,0" 
+                                   Height="22"
+                                   TextAlignment="Center" 
+                                   />
+                            </StackPanel>
+
+
+
+                        </StackPanel>
+                        <DataGrid x:Name="CartrigeGrid"
+                                  Grid.Row="3" 
+                                  Margin="10,15,10,0" 
+                                  Grid.RowSpan="3" 
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True"
+                                  BorderThickness="0"
+                                  HeadersVisibility="Column"
+                                  GridLinesVisibility="Horizontal"
+                                  HorizontalGridLinesBrush="#EDF2F7"
+                                  Background="White"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                   >
+                            <DataGrid.ContextMenu>
+                                <ContextMenu x:Name="ContextMenu" Background="White"
+                                             BorderBrush="#E5E7EB"
+                                             BorderThickness="1"
+                                             Padding="4">
+                                    <MenuItem Header="Изменить" Padding="8,6"
+                                              FontSize="13"
+                                              Foreground="#1F2937"
+                                              Click="EditRows_Click">
+                                        <MenuItem.Icon>
+                                            <TextBlock Text="&#xE70F;" FontSize="13"
+                                                       Foreground="#4B5563" 
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Segoe MDL2 Assets"
+                                                       />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="Удалить" Padding="8,6"
+                                          FontSize="13"
+                                          Foreground="#1F2937"
+                                          Click="Delete_Row">
+                                        <MenuItem.Icon>
+                                            <TextBlock Text="&#xE74D;" FontSize="13" 
+                                                       Foreground="#DC2626" 
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Segoe MDL2 Assets"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                            <DataGrid.Resources>
+                                <Style x:Key="CellTextStyle" TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                    <Setter Property="Padding" Value="3,0"/>
+                                </Style>
+                            </DataGrid.Resources>
+
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#F1F4F9"/>
+                                    <Setter Property="FontSize" Value="10"/>
+                                    <Setter Property="Padding" Value="12,10"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+
+                            <!--Это типо стиль для строк, когда чел будет наводится у строки будут приятненько для глаза меняться свойства-->
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                    <Setter Property="Foreground" Value="#2D3748"/>
+                                    <Setter Property="FontSize" Value="9"/>
+                                    <Setter Property="Height" Value="35"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F7FAFC"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#EBF0FA"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn 
+                                    Header="Модель"
+                                    Binding="{Binding Model}"
+                                    Width="150"
+                                    ElementStyle="{StaticResource CellTextStyle}"/>
+                                <DataGridTextColumn 
+                                    Header="Серийный номер" 
+                                    Binding="{Binding SerialNumber}"
+                                    Width="150"
+                                    ElementStyle="{StaticResource CellTextStyle}"/>
+                                <DataGridTextColumn
+                                    Header="Принтер"
+                                    Binding="{Binding Printers.PrinterName, 
+                                    TargetNullValue='Не установлен',FallbackValue='Не установлен'}"
+                                    Width="150"
+                                    ElementStyle="{StaticResource CellTextStyle}"
+                                    />
+                                <DataGridTextColumn
+                                    Header="Дата покупки"
+                                    Binding="{Binding DataPurchase, StringFormat=dd:MM:yyyy}"
+                                    Width="150"
+                                    ElementStyle="{StaticResource CellTextStyle}"
+                                    />
+                                <DataGridTextColumn
+                                    Header="Статус"
+                                    Binding="{Binding Status}"
+                                    Width="*"
+                                    ElementStyle="{StaticResource CellTextStyle}"
+                                    />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+
+                </StackPanel>
+                <!--Миниокошко для добавления картриджааааа-->
+                <Border BorderBrush="Gray"
+                        BorderThickness="1"
+                        Height="300" Width="300"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.RowSpan="2" Grid.Row="1" Grid.Column="1"
+                        Margin="0 0 0 110"
+                        Background="#c9f1f2"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="Новый картридж" 
+                                   HorizontalAlignment="Center" Padding="10"
+                                   FontWeight="SemiBold"/>
+                        <StackPanel Height="250" Width="280" Orientation="Horizontal"
+                                    >
+                            <TextBlock Text="Модель картриджа" FontSize="10" 
+                                       Height="20"
+                                       VerticalAlignment="Top" Padding="0 10"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Viewbox>
+
+    </Grid>
+</Window>
